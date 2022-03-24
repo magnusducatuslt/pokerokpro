@@ -1,4 +1,4 @@
-const {ChainStore, PrivateKey, key, Aes} = require ("bitsharesjs");
+import {ChainStore, PrivateKey, key, Aes} from "bitsharesjs";
 function generateKeyFromPassword(accountName, role, password) {
     let seed = accountName + role + password;
     let privKey = PrivateKey.fromSeed(seed);
