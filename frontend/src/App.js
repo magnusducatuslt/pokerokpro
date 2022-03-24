@@ -9,15 +9,17 @@ import {
 
 import './App.css';
 
-import Lauout from './pages/Lauout.js'
+import Layout from './pages/Layout.js'
 import Login from './pages/Login.js'
+import Leaderboard from './pages/Leaderboard.js'
+import Account from './pages/Account.js'
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route element={<Lauout > <Outlet /> </Lauout>}>
+        <Route element={<Layout > <Outlet /> </Layout>}>
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/account" element={<Account />} />
         </Route>
@@ -25,18 +27,5 @@ function App() {
   </Router>
   );
 }
-
-
-
-
-
-function Leaderboard() {
-  return <h2>Leaderboard</h2>;
-}
-
-function Account() {
-  return <h2>Account</h2>;
-}
-
 
 export default App;
