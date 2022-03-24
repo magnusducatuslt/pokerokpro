@@ -4,6 +4,6 @@ import login from './login'
 const  router = Router();
 
 
-router.use('/api',login)
+router.use('/api/',login)
 
 export default router

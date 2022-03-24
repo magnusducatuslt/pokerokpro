@@ -9,7 +9,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
 app.use(bodyParser.json())
-
 const PORT = 7777;
 
 app.use('/',routes)
