@@ -1,16 +1,15 @@
-import {Router} from 'express';
+
+import {Request, Response} from 'express'
+
 import {CaseLogin} from '../cases/login'
 import {Bitshares} from '../blockchain'
 import {Repository} from '../repository'
+import {JWT} from '../../infra/jwt'
+import {database} from '../../infra/database'
 
-const router = Router();
 
-const db = new Map();
-router.post('/login',(req,res)=>{
-
+export const login = (req:Request,res:Response)=>{
     const data = req.body
-    new CaseLogin(new Repository(db), new Bitshares()).invoke(data).then(result => res.json(result))
-})
+    new CaseLogin(new Repository(database), new Bitshares(), new JWT()).invoke(data).then(result => res.status(200).json(result))
+}
 
-
-export default router

@@ -1,20 +1,17 @@
 import {Bitshares} from '../../blockchain'
 import {Repository} from '../../repository'
-import jwt from 'jsonwebtoken'
+import {JWT} from '../../../infra/jwt'
 
-const tokenKey = '1a2b-3c4d-5e6f-7g8h-asdasd-asdasd-s'
 export class CaseLogin {
     
-    constructor(private _repository:Repository,private _blockchain:Bitshares){}
+    constructor(private _repository:Repository,private _blockchain:Bitshares, private jwt:JWT){}
 
     public async invoke({login,password}:{login:string,password:string}){
         const user = await this._repository.findUser(login);
         console.log(user)
         if(user) {
             return {
-                id: user.id,
-                login: user.login,
-                token: jwt.sign({ id: user.id }, tokenKey),
+                token: this.jwt.getTokenFromData(user)
             }
         }
 
@@ -26,9 +23,7 @@ export class CaseLogin {
             if(isCredsValid){
                const user  = await this._repository.createUser(Object.assign({login,password,pubKey},{id:`${Date.now()}`}))
                return {
-                id: user.id,
-                login: user.login,
-                token: jwt.sign({ id: user.id }, tokenKey),
+                token: this.jwt.getTokenFromData(user)
               }
             }
             
