@@ -7,6 +7,12 @@ const routes = express.Router()
 
 routes.use('/login',login)
 
+routes.post('/logout', (req, res) => {
+    res.json({
+      ok: 'ok'
+    })
+  })
+
 routes.get('/user',validateToken, (req, res) => {
     res.json({
       nickname: 'vasa',
