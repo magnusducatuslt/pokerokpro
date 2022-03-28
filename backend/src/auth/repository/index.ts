@@ -1,9 +1,9 @@
 import User from '../../entities/User'
-import Database from '../../infra/database'
+import {DatabaseT} from '../../infra/database'
 
 export class Repository{
     
-    constructor( private db: Database){
+    constructor( private db: DatabaseT){
     }
     
     public async findUser(login:string): Promise<User | undefined>{

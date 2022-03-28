@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node ./src/auth/api.js",
-    "start:auth": "ts-node ./src/auth/main.ts",
+    "start:all": "ts-node ./src/main.ts",
     "build": "yarn clean && tsc -p .",
     "clean": "rm -rf ./dist"
   },

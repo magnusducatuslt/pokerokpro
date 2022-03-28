@@ -1,9 +1,10 @@
 import {Router} from 'express';
-import {login} from './login'
-
 const router = Router();
 
+router.get('/',(req,res)=>{
+   res.send('success')
+   
+})
 
-router.post('/login',login)
 
 export default router

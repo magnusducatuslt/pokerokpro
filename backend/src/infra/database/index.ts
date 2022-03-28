@@ -1,5 +1,5 @@
 import User from '../../entities/User'
 
-type Database = Map<string, User>
+export type DatabaseT = Map<string, User>
 
-export default Database
+export const database:DatabaseT = new Map()
