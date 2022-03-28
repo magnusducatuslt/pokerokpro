@@ -19,7 +19,8 @@ export class Bitshares {
 
     public findUser(login:string): Promise<typeof Result>{
         //@ts-ignore
-        return axios.post<typeof fullAccounwDTO>(URL,{"method": "call","params":[0,"get_full_accounts",[[login],true]],"id": 9}).then(result => result.data.result[0][1])
+        return axios.post<typeof fullAccounwDTO>(URL,{"method": "call","params":[0,"get_full_accounts",[[login],true]],"id": 9})
+            .then(result => result.data.result[0][1])
     }
 
     public validateUser(data:{login:string,password:string,pubKey:string}){
