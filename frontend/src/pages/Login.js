@@ -1,5 +1,6 @@
 import React, {
   useRef,
+  useState,
 } from 'react';
 import { useNavigate } from "react-router-dom";
 
@@ -8,34 +9,70 @@ import * as api from '../api'
 function Login() {
   const loginInput = useRef(null);
   const passwordInput = useRef(null);
+  const [msg, setMsg] = useState('');
 
   const navigate = useNavigate();
 
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
+
     const login = loginInput.current.value;
     const password = passwordInput.current.value;
 
-    api.login(login, password).then((data) => {
+    api.login(login, password).then((data) => {      
       navigate('/account');      
+    }).catch(() => {
+      setMsg('Incorrect login or password');
     })
   }
 
+  // return (
+  //   <div>
+  //     <div className="Login">
+  //       <div className="Login__field">
+  //         <p>login</p>
+  //         <input type='text' ref={loginInput} />
+  //       </div>
+  //       <div className="Login__field">
+  //         <p>password</p>
+  //         <input type='password' ref={passwordInput} />
+  //       </div>
+  //       <div className="Login__field">
+  //         <button onClick={handleLogin}>login</button>
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
+
   return (
-    <div>
-      <div className="Login">
-        <div className="Login__field">
-          <p>login</p>
-          <input type='text' ref={loginInput} />
+    <section className="hero has-background-grey-light is-fullheight is-fullwidth">
+        <div className="hero-body">
+            <div className="container">
+                <div className="columns is-centered">
+                    <div className="column is-4-desktop">
+                        <form onSubmit={handleLogin} className="box">
+                            <p className="has-text-centered">{msg}</p>
+                            <div className="field mt-5">
+                                <label className="label">Email or Username</label>
+                                <div className="controls">
+                                    <input type="text" className="input" placeholder="Username" ref={loginInput} />
+                                </div>
+                            </div>
+                            <div className="field mt-5">
+                                <label className="label">Password</label>
+                                <div className="controls">
+                                    <input type="password" className="input" placeholder="******" ref={passwordInput} />
+                                </div>
+                            </div>
+                            <div className="field mt-5">
+                                <button className="button is-success is-fullwidth">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div className="Login__field">
-          <p>password</p>
-          <input type='password' ref={passwordInput} />
-        </div>
-        <div className="Login__field">
-          <button onClick={handleLogin}>login</button>
-        </div>
-      </div>
-    </div>
+    </section>
   );
 }
 

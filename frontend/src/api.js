@@ -2,9 +2,11 @@ import axios from 'axios';
 
 const axiosJWT = axios.create();
 
-const token = localStorage.getItem('token')
+
 
 axiosJWT.interceptors.request.use(async (config) => {
+  const token = localStorage.getItem('token')
+
 	config.headers.Authorization = `Bearer ${token}`;
 
 	return config;
@@ -16,7 +18,7 @@ let onError = null;
 axiosJWT.interceptors.response.use((response) => {
   return response
 }, async function (error) {
-  if (error.response.status === 401) {
+  if (error.response.status === 403 || error.response.status === 401) {
   	if (onError) onError();
   }
   return Promise.reject(error);
