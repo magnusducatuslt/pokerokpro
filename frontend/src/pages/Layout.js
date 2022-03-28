@@ -1,21 +1,29 @@
-import React from 'react';
+import React, {
+  useEffect
+} from 'react';
 import {
   Link,
 } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
 
-import axios from 'axios';
+import * as api from '../api'
+
 
 
 const Layout = ({ children }) => {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    axios.post('/api/logout').then(() => {
+  const handleLogout = () => {    
+    api.logout().then(() => {
       navigate('/login'); 
     })
   }
+
+  useEffect(() => {
+    api.onLogout(handleLogout);
+  }, []);
+
 
   return (
     <div>

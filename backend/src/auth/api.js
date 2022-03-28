@@ -2,33 +2,6 @@ var express = require('express')
 var app = express()
 var port = 3001
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-
-app.post('/api/login', (req, res) => {
-  res.json({
-    token: 'blal bla',
-  })
-})
-
-app.post('/api/logout', (req, res) => {
-  res.json({
-    ok: 'ok'
-  })
-})
-
-
-app.get('/api/user', (req, res) => {
-  res.json({
-    nickname: 'vasa',
-    balance: 1233,
-    games: 100,
-  })
-})
-
-
 const leaderboard = [
   {
     id: 1,
@@ -55,6 +28,51 @@ const leaderboard = [
     balance: 2000,
   },
 ]
+
+const verifyToken = (req, res, next) => {
+    const authHeader = req.headers['authorization'];
+
+    console.log('authHeader ', authHeader);
+
+    const token = authHeader && authHeader.split(' ')[1];
+    if(token == null) return res.sendStatus(401);
+    // jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+    //     if(err) return res.sendStatus(403);
+    //     req.email = decoded.email;
+    //     next();
+    // })
+
+    if (token === '111') return res.sendStatus(401);
+    else next();
+}
+
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+
+app.post('/api/login', (req, res) => {
+  res.json({
+    token: 'blal bla',
+  })
+})
+
+app.post('/api/logout', (req, res) => {
+  res.json({
+    ok: 'ok'
+  })
+})
+
+
+app.get('/api/user', verifyToken, (req, res) => {
+  res.json({
+    nickname: 'vasa',
+    balance: 1233,
+    games: 100,
+  })
+})
+
 
 app.get('/api/leaderboard', (req, res) => {
   res.json(leaderboard)

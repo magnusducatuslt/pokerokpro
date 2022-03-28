@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useNavigate } from "react-router-dom";
 
-import axios from 'axios';
+import * as api from '../api'
 
 function Login() {
   const loginInput = useRef(null);
@@ -15,12 +15,7 @@ function Login() {
     const login = loginInput.current.value;
     const password = passwordInput.current.value;
 
-    axios.post('/api/login', {
-      login,
-      password,
-    }).then(response => response.data).then((data) => {
-      console.log('> response ', data);
-
+    api.login(login, password).then((data) => {
       navigate('/account');      
     })
   }
