@@ -3,7 +3,8 @@ import React, {
   useState,
 } from 'react';
 
-import axios from 'axios';
+// import axios from 'axios';
+import * as api from '../api'
 
 
 function Account() {
@@ -12,7 +13,7 @@ function Account() {
 
 
   useEffect(() => {
-    axios.get('/api/user').then(response => response.data).then(user => {
+    api.getUser().then(user => {
       setUser(user);
     })
 

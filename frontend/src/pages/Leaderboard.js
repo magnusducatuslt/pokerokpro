@@ -3,7 +3,7 @@ import React, {
   useState,
 } from 'react';
 
-import axios from 'axios';
+import * as api from '../api'
 
 function Leaderboard() {
 
@@ -11,14 +11,14 @@ function Leaderboard() {
 
 
   useEffect(() => {
-    axios.get('/api/leaderboard').then(response => response.data).then(leaderboard => {
+    api.getLeaderboard().then(leaderboard => {
       setLeaderboard(leaderboard);
     })
 
   }, []);
 
   const handleRefresh = () => {
-    axios.get('/api/leaderboard/refresh').then(response => response.data).then(leaderboard => {
+    api.refreshLeaderboard().then(leaderboard => {
       setLeaderboard(leaderboard);
     })
   }
@@ -37,7 +37,7 @@ function Leaderboard() {
           </thead>
           <tbody>
             {data.map(item => (
-              <tr>
+              <tr key={item.nickname}>
                 <td>{item.nickname}</td>
                 <td>{item.games}</td>
                 <td>{item.balance}</td>
