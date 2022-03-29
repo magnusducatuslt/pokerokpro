@@ -10,16 +10,19 @@ function Leaderboard() {
   const [data, setLeaderboard] = useState([]);
 
 
-  useEffect(() => {
+  const loadTable = () => {
     api.getLeaderboard().then(leaderboard => {
       setLeaderboard(leaderboard);
-    })
+    })    
+  }
 
+  useEffect(() => {
+    loadTable();
   }, []);
 
   const handleRefresh = () => {
-    api.refreshLeaderboard().then(leaderboard => {
-      setLeaderboard(leaderboard);
+    api.refreshLeaderboard().then(() => {
+      loadTable();
     })
   }
 
@@ -30,16 +33,16 @@ function Leaderboard() {
         <table className="table is-striped is-fullwidth">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>game count</th>
-              <th>score</th>
+              <th>position</th>
+              <th>nickname</th>
+              <th>balance</th>
             </tr>
           </thead>
           <tbody>
             {data.map(item => (
               <tr key={item.nickname}>
+                <td>{item.position}</td>
                 <td>{item.nickname}</td>
-                <td>{item.games}</td>
                 <td>{item.balance}</td>
               </tr>
              ))}

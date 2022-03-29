@@ -14,7 +14,15 @@ export const getRatingFromBitshares = (req:Request,res:Response)=>{
 
     new CaseGetRatingFromBitshares(repository,blockchain)
         .invoke(data)
-        .then(result => res.status(200).json(result))
+        .then(result => {
+            const response = result.total.map(item => ({
+                nickname: item.n,
+                games: 1,
+                balance: item.v,
+                position: item.p,
+            }))
+            res.status(200).json(response)
+        })
         .catch(error=>res.sendStatus(401))
 }
 
