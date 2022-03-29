@@ -6,11 +6,14 @@ import {Bitshares} from '../blockchain'
 import {Repository} from '../repository'
 import {JWT} from '../../infra/jwt'
 import {database} from '../../infra/database'
-
+import {CaseRefreshAccountStatistics} from '../cases/refreshAccountStatistics'
 
 export const login = (req:Request,res:Response)=>{
     const data = req.body
-    new CaseLogin(new Repository(database), new Bitshares(), new JWT())
+    const repository = new Repository(database)
+    const blockchain = new Bitshares()
+
+    new CaseLogin(repository, blockchain, new JWT(), new CaseRefreshAccountStatistics(repository,blockchain))
         .invoke(data)
         .then(result => res.status(200).json(result))
         .catch(error=>res.sendStatus(401))

@@ -1,5 +1,5 @@
 import express from 'express';
-import {login,validateToken} from './auth/controllers'
+import {login,validateToken, getUserInfo, getRatingFromBitshares,refreshAccountStatistics} from './account/controllers'
 import dashBoardRoutes from './dashboard'
 
 const app = express()
@@ -11,18 +11,18 @@ routes.post('/logout', (req, res) => {
     res.json({
       ok: 'ok'
     })
-  })
+})
 
-routes.get('/user',validateToken, (req, res) => {
-    res.json({
-      nickname: 'vasa',
-      balance: 1233,
-      games: 100,
-    })
-  })
+routes.get('/user',validateToken, getUserInfo)
   
+  routes.get('/leaderboard',validateToken, getRatingFromBitshares)
   
-  const leaderboard = [
+  routes.get('/leaderboard/refresh',validateToken, refreshAccountStatistics)
+
+const router = express.Router();
+router.use('/api',routes)
+
+const leaderboard = [
     {
       id: 1,
       nickname: 'vasa',
@@ -48,16 +48,5 @@ routes.get('/user',validateToken, (req, res) => {
       balance: 2000,
     },
   ]
-  
-  routes.get('/leaderboard',validateToken, (req, res) => {
-    res.json(leaderboard)
-  })
-  
-  routes.get('/leaderboard/refresh',validateToken, (req, res) => {
-    res.json(leaderboard)
-  })
-
-const router = express.Router();
-router.use('/api',routes)
 
 export {router as routes}

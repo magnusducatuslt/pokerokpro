@@ -1,6 +1,6 @@
 import {Request} from 'express'
 import jwt from 'jsonwebtoken'
-import User from '../../entities/User'
+import {User} from '../../entities/User'
 
 const TOKEN_SECRET = `1a2b-3c4d-@5e6f-7g8h-asdasd-asdasd-s`
 const EXPIRES_IN = '1800s'

@@ -4,6 +4,8 @@ import {ChainStore, PrivateKey, key, Aes} from "bitsharesjs";
 import axios from 'axios';
 import fullAccounwDTO from './dto/get_full_account.json'
 import Result from './dto/result.json'
+import {User} from '../../entities'
+import {RatingFromTotalPoker} from './dto/rating'
 
 const URL = 'http://playchain2.prod.totalpoker.io:8500'
 
@@ -20,7 +22,9 @@ export class Bitshares {
     public findUser(login:string): Promise<typeof Result>{
         //@ts-ignore
         return axios.post<typeof fullAccounwDTO>(URL,{"method": "call","params":[0,"get_full_accounts",[[login],true]],"id": 9})
-            .then(result => result.data.result[0][1])
+            .then(result => {
+                return result.data.result[0][1]
+            })
     }
 
     public validateUser(data:{login:string,password:string,pubKey:string}){
@@ -34,5 +38,10 @@ export class Bitshares {
     public static getPubKey(result:typeof Result): string{
         //@ts-ignore
         return result.account.owner.key_auths[0][0] as string
+    }
+
+    public receiveRating(data:Pick<User,"login">): Promise<RatingFromTotalPoker>{
+        return axios.get<RatingFromTotalPoker>(`http://api.prod.totalpoker.io:8403/leaderboard/api/v1.0/current?player_name=${data.login}&request_id=0`)
+            .then(result => result.data)
     }
 }
