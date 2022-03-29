@@ -3,16 +3,20 @@ import React, {
   useState,
 } from 'react';
 
+import Loader from '../components/Loader.js'
+
 import * as api from '../api'
 
 function Leaderboard() {
 
   const [data, setLeaderboard] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(true);
 
   const loadTable = () => {
+    setIsLoading(true);
     api.getLeaderboard().then(leaderboard => {
       setLeaderboard(leaderboard);
+      setIsLoading(false)
     })    
   }
 
@@ -28,8 +32,13 @@ function Leaderboard() {
 
   return (
     <div className="container mt-5">
-      <button className="button" onClick={handleRefresh}>refresh</button>
-      <div>
+      {isLoading
+        ? (
+          <Loader />
+        )
+        : (
+          <div>
+        <button className="button" onClick={handleRefresh}>refresh</button>
         <table className="table is-striped is-fullwidth">
           <thead>
             <tr>
@@ -49,6 +58,7 @@ function Leaderboard() {
           </tbody>
         </table>
       </div>
+      )}
     </div>
   );
 }

@@ -3,13 +3,14 @@ import React, {
 } from 'react';
 import {
   Link,
+  NavLink,
 } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
 
 import * as api from '../api'
 
-
+import LogoImage from '../Logo.png';
 
 const Layout = ({ children }) => {
   const navigate = useNavigate();
@@ -30,8 +31,8 @@ const Layout = ({ children }) => {
       <nav className="navbar is-light" role="navigation" aria-label="main navigation">
         <div className="container">
             <div className="navbar-brand">
-                <a className="navbar-item" href="https://bulma.io">
-                    <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" alt="logo" />
+                <a className="navbar-item" href="/account">
+                    <img src={LogoImage} width="65" height="65" alt="logo" />
                 </a>
 
                 <a href="/" role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -43,8 +44,8 @@ const Layout = ({ children }) => {
 
             <div id="navbarBasicExample" className="navbar-menu">
                 <div className="navbar-start">
-                    <Link to='account' className="navbar-item">account</Link>
-                    <Link to='leaderboard' className="navbar-item">leaderboard</Link>
+                    <NavLink to='account' className={({ isActive })=> `navbar-item ${isActive ? 'is-active': ''}`}>account</NavLink>
+                    <NavLink to='leaderboard' className={({ isActive })=> `navbar-item ${isActive ? 'is-active': ''}`}>leaderboard</NavLink>
                 </div>
 
                 <div className="navbar-end">

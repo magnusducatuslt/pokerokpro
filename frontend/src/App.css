@@ -1,34 +1,15 @@
-* {
-  margin: 0;
-  padding: 0;
+.loader-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
 }
 
-.Login {
-  margin: 0 auto;
-  width: 200px;
-  padding-top: 100px;
+.loader-wrapper .loader {
+  width: 80px;
+  height: 80px;
 }
 
-.Login__field {
-  margin: 10px 0;
-}
-
-.navigation {
-  display: flex;
-  width: 600px;
-  margin: 0 auto;
-  margin-bottom: 20px;
-}
-
-.navigation a {
-  margin-right: 20px;
-}
-
-.navigation__logout {
-    margin-left: auto;
-}
-
-.navigation__content {
-  width: 600px;
-  margin: 0 auto;  
+.navbar-item img {
+  max-height: none !important;
 }
