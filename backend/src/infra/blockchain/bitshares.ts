@@ -46,8 +46,9 @@ export class Bitshares {
             .then(result => result.data)
     }
 
-    public async refresh(login:string): Promise<AccountHistory[]>{
-        return axios.post<{result:AccountHistory[]}>(URL, {"jsonrpc": "2.0", "params": ["history", "get_account_history", [login, "1.11.0", 10, "1.11.0"]], "method": "call", "id": 10})
+    public async refresh(login:string, offsetId = ''): Promise<AccountHistory[]>{
+        const payload = {"jsonrpc": "2.0", "params": ["history", "get_account_history", offsetId.length ? [login, "1.11.0", 100, offsetId,"1.11.0"] : [login, "1.11.0", 100, "1.11.0"]], "method": "call", "id": 10}
+        return axios.post<{result:AccountHistory[]}>(URL,payload )
             .then(response => response.data.result)
     }
 }
