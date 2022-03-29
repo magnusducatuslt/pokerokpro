@@ -1,7 +1,7 @@
-import {Bitshares} from '../../blockchain'
-import {Repository} from '../../repository'
+import {Bitshares} from '../../../infra/blockchain'
+import {Repository} from '../../../account/repository'
 import {User,Account} from '../../../entities'
-import AccountInfoFromBitshares from '../../blockchain/dto/result.json'
+import AccountInfoFromBitshares from '../../../infra/blockchain/dto/result.json'
 
 
 export class CaseRefreshAccountStatistics {
@@ -20,7 +20,7 @@ export class CaseRefreshAccountStatistics {
         }
     }
 
-    public async invoke({login}:User){
+    public async invoke({login}:User):Promise<Account>{
         try{
 
            

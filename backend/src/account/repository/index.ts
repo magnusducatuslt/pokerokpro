@@ -10,16 +10,22 @@ export class Repository{
         return this.db.get(login)
     }
 
-    public async createUser(data:User & Account){
+    public async createUser(data:User & Account): Promise<User & Account>{
         this.db.set(data.login,data)
         return data
     }
 
-    public async renewAccountStatisticByAccountInfo(data:Account){
+    public async renewAccountStatisticByAccountInfo(data:Account): Promise<Account>{
         const user = this.db.get(data.nickname)
         const newData = Object.assign(user,data)
         this.db.set(user!.login,newData)
-        return newData
+        return {
+            id:newData.id,
+            nickname:newData.nickname,
+            games:newData.games, 
+            balance:newData.balance, 
+            position:newData.position
+        }
     }
 
     public async renewAccountStatisticByRaiting(data:Pick<User,"login">){
@@ -33,11 +39,11 @@ export class Repository{
         }
         
         return {
-            id:"",
-            nickname:"",
-            games:0, 
-            balance:0, 
-            position:0
+            id:user.id,
+            nickname:user.nickname,
+            games:user.games, 
+            balance:user.balance, 
+            position:user.position
         }
     }
 

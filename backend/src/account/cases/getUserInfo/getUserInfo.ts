@@ -1,15 +1,15 @@
 import {Repository} from '../../repository'
-import {User} from '../../../entities/User'
+import {User,Account} from '../../../entities'
 
 export class CaseUserInfo {
     
     constructor(private _repository:Repository){}
 
-    public async invoke({login}:User){
+    public async invoke({login}:User) : Promise<Account>{
         try{
-            const user = await this._repository.findUser(login);
+            const account = await this._repository.getAccountInfo(login);
 
-            return user
+            return account
         }catch(error){
             console.log(error);
             throw error

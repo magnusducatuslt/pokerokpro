@@ -2,11 +2,11 @@
 import {Request, Response} from 'express'
 
 import {CaseLogin} from '../cases/login'
-import {Bitshares} from '../blockchain'
+import {Bitshares} from '../../infra/blockchain'
 import {Repository} from '../repository'
 import {JWT} from '../../infra/jwt'
 import {database} from '../../infra/database'
-import {CaseRefreshAccountStatistics} from '../cases/refreshAccountStatistics'
+import {CaseRefreshAccountStatistics} from '../../dashboard/cases/refreshAccountStatistics'
 
 export const login = (req:Request,res:Response)=>{
     const data = req.body

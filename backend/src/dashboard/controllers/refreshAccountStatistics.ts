@@ -1,8 +1,8 @@
 
 import {Request, Response} from 'express'
 
-import {Bitshares} from '../blockchain'
-import {Repository} from '../repository'
+import {Bitshares} from '../../infra/blockchain'
+import {Repository} from '../../account/repository'
 import {database} from '../../infra/database'
 import {CaseRefreshAccountStatistics} from '../cases/refreshAccountStatistics'
 

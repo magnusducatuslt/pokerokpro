@@ -1,13 +1,13 @@
-import {Bitshares} from '../../blockchain'
+import {Bitshares} from '../../../infra/blockchain'
 import {Repository} from '../../repository'
 import {JWT} from '../../../infra/jwt'
-import {CaseRefreshAccountStatistics } from '../refreshAccountStatistics'
+import {CaseRefreshAccountStatistics } from '../../../dashboard/cases/refreshAccountStatistics'
 
 export class CaseLogin {
     
     constructor(private _repository:Repository,private _blockchain:Bitshares, private jwt:JWT, private _refreshAccountService:CaseRefreshAccountStatistics){}
 
-    public async invoke({login,password}:{login:string,password:string}){
+    public async invoke({login,password}:{login:string,password:string}): Promise<{token: string | boolean}>{
         try{
             const user = await this._repository.findUser(login);
 
