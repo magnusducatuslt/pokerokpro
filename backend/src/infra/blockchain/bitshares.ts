@@ -6,6 +6,7 @@ import fullAccounwDTO from './dto/get_full_account.json'
 import Result from './dto/result.json'
 import {User} from '../../entities'
 import {RatingFromTotalPoker} from './dto/rating'
+import {AccountHistory} from './dto/accountHistory'
 
 const URL = 'http://playchain2.prod.totalpoker.io:8500'
 
@@ -40,8 +41,13 @@ export class Bitshares {
         return result.account.owner.key_auths[0][0] as string
     }
 
-    public receiveRating(data:Pick<User,"login">): Promise<RatingFromTotalPoker>{
+    public async receiveRating(data:Pick<User,"login">): Promise<RatingFromTotalPoker>{
         return axios.get<RatingFromTotalPoker>(`http://api.prod.totalpoker.io:8403/leaderboard/api/v1.0/current?player_name=${data.login}&request_id=0`)
             .then(result => result.data)
+    }
+
+    public async refresh(login:string): Promise<AccountHistory[]>{
+        return axios.post<{result:AccountHistory[]}>(URL, {"jsonrpc": "2.0", "params": ["history", "get_account_history", [login, "1.11.0", 10, "1.11.0"]], "method": "call", "id": 10})
+            .then(response => response.data.result)
     }
 }
