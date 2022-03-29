@@ -13,3 +13,19 @@
 .navbar-item img {
   max-height: none !important;
 }
+
+
+.account {
+  padding-top: 40px;
+}
+
+.stat-val {
+  font-size: 3em;
+  padding-top: 20px;
+  font-weight: bold;
+}
+  
+.stat-key {
+  font-size: 1.4em;
+  font-weight: 200
+}

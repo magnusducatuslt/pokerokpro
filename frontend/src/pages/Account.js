@@ -27,11 +27,22 @@ function Account() {
       {isLoading ? (
         <Loader />        
       ) : (
-        <div>
-          <h2>Account</h2>
-          <div>nickname: {user.nickname}</div>
-          <div>games: {user.games}</div>
-          <div>balance: {user.balance}</div>
+        <div className="account">
+          <h2 className="title is-bold has-text-centered">{user.nickname}</h2>
+          <div className="columns is-multiline">
+            <div className="column has-text-centered">
+              <p className="stat-val">{user.position}</p>
+              <p className="stat-key">position</p>
+            </div>
+            <div className="column has-text-centered">
+              <p className="stat-val">{user.balance}</p>
+              <p className="stat-key">balance</p>
+            </div>
+            <div className="column has-text-centered">
+              <p className="stat-val">{user.games}</p>
+              <p className="stat-key">games</p>
+            </div>
+          </div>
         </div>
       )}
     </div>
