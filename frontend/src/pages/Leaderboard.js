@@ -24,10 +24,10 @@ function Leaderboard() {
   }
 
   return (
-    <div>
-      <button onClick={handleRefresh}>refresh</button>
+    <div className="container mt-5">
+      <button className="button" onClick={handleRefresh}>refresh</button>
       <div>
-        <table>
+        <table className="table is-striped is-fullwidth">
           <thead>
             <tr>
               <th>Name</th>
