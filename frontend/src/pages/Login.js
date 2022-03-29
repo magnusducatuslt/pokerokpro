@@ -26,24 +26,6 @@ function Login() {
     })
   }
 
-  // return (
-  //   <div>
-  //     <div className="Login">
-  //       <div className="Login__field">
-  //         <p>login</p>
-  //         <input type='text' ref={loginInput} />
-  //       </div>
-  //       <div className="Login__field">
-  //         <p>password</p>
-  //         <input type='password' ref={passwordInput} />
-  //       </div>
-  //       <div className="Login__field">
-  //         <button onClick={handleLogin}>login</button>
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
-
   return (
     <section className="hero has-background-grey-light is-fullheight is-fullwidth">
         <div className="hero-body">

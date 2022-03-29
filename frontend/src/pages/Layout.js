@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import {
   Link,
+  NavLink,
 } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
@@ -43,8 +44,8 @@ const Layout = ({ children }) => {
 
             <div id="navbarBasicExample" className="navbar-menu">
                 <div className="navbar-start">
-                    <Link to='account' className="navbar-item">account</Link>
-                    <Link to='leaderboard' className="navbar-item">leaderboard</Link>
+                    <NavLink to='account' className={({ isActive })=> `navbar-item ${isActive ? 'is-active': ''}`}>account</NavLink>
+                    <NavLink to='leaderboard' className={({ isActive })=> `navbar-item ${isActive ? 'is-active': ''}`}>leaderboard</NavLink>
                 </div>
 
                 <div className="navbar-end">
