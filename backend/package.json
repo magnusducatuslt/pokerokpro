@@ -8,7 +8,9 @@
     "start:all": "ts-node ./src/main.ts",
     "start:env": "docker-compose up -d",
     "build": "yarn clean && tsc -p .",
-    "clean": "rm -rf ./dist"
+    "clean": "rm -rf ./dist",
+    "db:migrate": "yarn build && node ./tools/migrate-db.js up",
+    "db:migrate:skeleton": "ts-node ./src/db/mocks/migration-skeleton.ts"
   },
   "devDependencies": {
     "@types/dotenv": "^8.2.0",
@@ -34,6 +36,7 @@
     "module-alias": "^2.2.2",
     "pg": "^8.7.3",
     "sequelize": "^6.17.0",
+    "sequelize-cli": "^6.4.1",
     "uuid": "^8.3.2"
   },
   "_moduleAliases": {
