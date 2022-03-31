@@ -1,0 +1,33 @@
+version: "3.5"
+
+services:
+  pokerok_db:
+    container_name: pokerok_db_container
+    image: postgres
+    environment:
+      POSTGRES_USER: "${DATABASE_POSTGRES_USER:-user}"
+      POSTGRES_PASSWORD: "${DATABASE_POSTGRES_PASSWORD:-1}"
+      PGDATA: /data/postgres
+    volumes:
+      - pgdata:/data/postgres
+    ports:
+      - "${DATABASE_POSTGRES_PORT:-5888}:5432"
+    # command: sh -c "postgres -U user -c wal_level = hot_standby && postgres -c wal_keep_segments = 1000"
+    restart: unless-stopped
+
+  pokerok_admin:
+    container_name: pokerok_db_admin_container
+    image: dpage/pgadmin4:4.21
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "${DATABASE_PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}"
+      PGADMIN_DEFAULT_PASSWORD: "${DATABASE_PGADMIN_DEFAULT_PASSWORD:-admin}"
+    volumes:
+      - ./tmp/pokerok_pgadmin:/root/.pgadmin
+    ports:
+      - "${DATABASE_PGADMIN_PORT}:80"
+    restart: unless-stopped
+    depends_on:
+      - pokerok_db
+
+volumes:
+  pgdata:

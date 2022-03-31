@@ -28,7 +28,7 @@ export class Bitshares {
             })
     }
 
-    public validateUser(data:{login:string,password:string,pubKey:string}){
+    public validateUser(data:{login:string,password:string,pubKey:string}):Boolean{
         const roles = ["active","owner","memo"];
         const parsedKey = data.pubKey.slice(4);
 
@@ -47,7 +47,7 @@ export class Bitshares {
     }
 
     public async refresh(login:string, offsetId = ''): Promise<AccountHistory[]>{
-        const payload = {"jsonrpc": "2.0", "params": ["history", "get_account_history", offsetId.length ? [login, "1.11.0", 100, offsetId,"1.11.0"] : [login, "1.11.0", 100, "1.11.0"]], "method": "call", "id": 10}
+        const payload = {"jsonrpc": "2.0", "params": ["history", "get_account_history", offsetId.length ? ["dima", "1.11.0", 100, offsetId,"1.11.0"] : ["dima", "1.11.0", 100, "1.11.0"]], "method": "call", "id": 10}
         return axios.post<{result:AccountHistory[]}>(URL,payload )
             .then(response => response.data.result)
     }

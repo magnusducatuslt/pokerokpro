@@ -2,7 +2,7 @@ import {Repository} from '../../repository'
 import {User,Account} from '../../../entities'
 import {Bitshares} from '../../../infra/blockchain'
 import {OperationsReasonsE, AccountHistory} from '../../../infra/blockchain/dto/accountHistory'
-
+import axios from 'axios'
 const LIMIT = 100;
 
 export class CaseUserInfo {
@@ -11,6 +11,7 @@ export class CaseUserInfo {
 
     private isLast(length:number){
         console.log('length is',length)
+
         return LIMIT !== length
     }
 
@@ -19,7 +20,7 @@ export class CaseUserInfo {
     }
 
     private async getTransactions(login:string, transactions:AccountHistory[],latestId = ''):Promise<AccountHistory[]>{
-        console.log('after',transactions.length)
+        console.log('before',transactions.length)
         const result = await this._blockchain.refresh(login,latestId.length ? latestId : '' )
         if(this.isLast(result.length)){
             return transactions.concat(result);
