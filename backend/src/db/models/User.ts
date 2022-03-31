@@ -1,7 +1,8 @@
-import { Sequelize, Model, DataTypes } from "sequelize";
+import { Sequelize, Model, DataTypes, Optional } from "sequelize";
 import { ModelType } from "../ModelType";
 
-export interface User extends Model {
+
+interface UserAttributes {
   readonly id: string;
   name?: string;
   username: string;
@@ -14,7 +15,14 @@ export interface User extends Model {
   readonly updatedAt: Date;
 }
 
-export type UserModel = ModelType<User>;
+//define attributes which be attr?:value in typescript definition 
+interface UserCreationAttributes extends Optional<UserAttributes, "id" | "createdAt" | "updatedAt"> {}
+
+interface UserInstance
+  extends Model<UserAttributes, UserCreationAttributes>,
+    UserAttributes {}
+
+export type UserModel = ModelType<UserInstance>;
 
 export const User = (dbService: Sequelize) => {
   const attributes = {
