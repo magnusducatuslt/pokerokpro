@@ -1,4 +1,3 @@
-import * as Joi from "joi";
 import path from "path";
 import fs from "fs";
 import { configSchema } from "./schemas/config";
@@ -45,6 +44,20 @@ export const config = {
       port: normalizeNumber(envVars.DATABASE_PGADMIN_PORT),
     },
   },
+  // redis: {
+  //   username: envVars.DATABASE_REDIS_USERNAME,
+  //   password: envVars.DATABASE_REDIS_PASSWORD,
+  //   domain: envVars.DATABASE_REDIS_DOMAIN,
+  //   port: normalizeNumber(envVars.DATABASE_REDIS_PORT),
+  // },
+  // logs: {
+  //   lvl: envVars.LOGS_LVL,
+  //   format: envVars.LOGS_FORMAT,
+  //   path: envVars.LOGS_PATH,
+  // },
+  // elastic: {
+  //   domain: envVars.ELASTICSEARCH_DOMAIN,
+  //   port: normalizeNumber(envVars.ELASTICSEARCH_PORT),
+  // },
 };
-
 

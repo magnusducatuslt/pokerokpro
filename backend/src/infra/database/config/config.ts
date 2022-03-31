@@ -17,28 +17,24 @@ const database = {
   },
 };
 
-const withSSL = Object.assign(
-  {
-    ssl: true,
-    dialectOptions: {
-      ssl: {
-        ca: fs.readFileSync(
-          `${process.cwd()}/certificates/${
-            config.postgres.config.certificate
-          }.crt`
-        ),
-      },
-    },
-  },
-  database
-);
+// const withSSL = Object.assign(
+//   {
+//     ssl: true,
+//     dialectOptions: {
+//       ssl: {
+//         ca: fs.readFileSync(
+//           `${process.cwd()}/certificates/${
+//             config.postgres.config.certificate
+//           }.crt`
+//         ),
+//       },
+//     },
+//   },
+//   database
+// );
 
 /* Sequelize uses CommonJS modules */
 module.exports = {
-  test: database,
-  testing: database,
   local: database,
-  development: withSSL,
-  stagging: withSSL,
-  production: withSSL,
+  // development: withSSL,
 };

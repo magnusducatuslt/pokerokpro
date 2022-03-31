@@ -18,6 +18,14 @@ const schema: Joi.SchemaMap = {
   DATABASE_PGADMIN_DEFAULT_EMAIL: Joi.string().required(),
   DATABASE_PGADMIN_DEFAULT_PASSWORD: Joi.string().required(),
   DATABASE_PGADMIN_PORT: Joi.number().required(),
+
+  // DATABASE_REDIS_USERNAME: Joi.string().required(),
+  // DATABASE_REDIS_DOMAIN: Joi.string().required(),
+  // DATABASE_REDIS_PORT: Joi.number().required(),
+
+  // LOGS_LVL: Joi.string().required(),
+  // LOGS_FORMAT: Joi.string().required(),
+  // LOGS_PATH: Joi.string().required(),
 };
 
 export const configSchema = Joi.object().keys(schema).unknown().required();
