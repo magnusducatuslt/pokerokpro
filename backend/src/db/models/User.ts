@@ -2,6 +2,8 @@ import { Sequelize, Model, DataTypes, Optional } from "sequelize";
 import { ModelType } from "../ModelType";
 
 
+export const TABLE_NAME = "users";
+
 interface UserAttributes {
   readonly id: string;
   name?: string;
@@ -40,7 +42,7 @@ export const User = (dbService: Sequelize) => {
     password: { type: DataTypes.STRING(250) },
   };
 
-  const model = dbService.define("user", attributes) as UserModel;
+  const model = dbService.define(TABLE_NAME, attributes) as UserModel;
 
   model.associate = function (models) {
     // TODO associate to account
