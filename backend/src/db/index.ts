@@ -1,8 +1,5 @@
 import { getDatabase } from "../infra/database";
 import { Sequelize, Options } from "sequelize";
-
-
-// import { Account } from "./models/Accounts";
 import { User } from "./models/User";
 
 const database = getDatabase();

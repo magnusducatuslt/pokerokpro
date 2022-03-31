@@ -1,5 +1,4 @@
 import { config } from "../../../config/config"
-import fs from "fs";
 
 const database = {
   database: config.postgres.config.database,

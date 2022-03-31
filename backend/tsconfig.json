@@ -35,7 +35,7 @@
       "typings/"
     ] /* List of folders to include type definitions from. */,    "paths": {
 //       "@alias": ["./src/alias.ts"],
-       "@alias": ["alias.ts"],
+       "@alias": ["./alias.ts"],
        "@core/db-config": ["./src/db/config/config.ts"],
        "@core/db": ["./src/db/index.ts"]
      },                           /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
