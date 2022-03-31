@@ -1,4 +1,4 @@
-import { Sequelize, Model, DataTypes, Optional } from "sequelize";
+import { Sequelize, Model, DataTypes, Optional,ModelAttributes } from "sequelize";
 import { ModelType } from "../ModelType";
 
 
@@ -6,7 +6,7 @@ export const TABLE_NAME = "users";
 
 interface UserAttributes {
   readonly id: string;
-  name?: string;
+  name: string;
   username: string;
   email: string;
   avatar: string;
@@ -27,7 +27,7 @@ interface UserInstance
 export type UserModel = ModelType<UserInstance>;
 
 export const User = (dbService: Sequelize) => {
-  const attributes = {
+  const attributes:ModelAttributes<UserInstance,UserAttributes> = {
     id: {
       type: DataTypes.STRING(250),
       defaultValue: DataTypes.UUIDV4,
@@ -41,6 +41,8 @@ export const User = (dbService: Sequelize) => {
     email: { type: DataTypes.STRING(250) },
     password: { type: DataTypes.STRING(250) },
   };
+
+  
 
   const model = dbService.define(TABLE_NAME, attributes) as UserModel;
 
