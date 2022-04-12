@@ -1,27 +1,28 @@
-import {User,Account} from '../../entities'
-import {DatabaseT} from '../../infra/database'
+import { User,Account } from '../../entities'
+import { DbType } from "../../db";
+import { UserInstance } from "../../db/models/User";
 
 export class Repository{
     
-    constructor( private db: DatabaseT){
+    constructor( private db: DbType) {
     }
     
-    public async findUser(login:string): Promise<User | undefined>{
-        return this.db.get(login)
+    public async findUser(login:string, password: string): Promise<UserInstance | null>{
+        return this.db.User.findOne({ where: {username: login, password: password}})
     }
 
-    public async createUser(data:User & Account): Promise<User & Account>{
-        this.db.set(data.login,data)
-        return data
+    public async createUser(userData: UserInstance): Promise<UserInstance>{
+        // this.db.set(data.login,data)
+        return await this.db.User.create(userData);
     }
 
     public async renewAccountStatisticByAccountInfo(data:Account): Promise<Account>{
-        const user = this.db.get(data.nickname)
+        const user = this.db.User.findOne({where: {username: data.username}})
         const newData = Object.assign(user,data)
-        this.db.set(user!.login,newData)
+        // this.db.set(user!.login,newData)
         return {
             id:newData.id,
-            nickname:newData.nickname,
+            username:newData.username,
             games:newData.games, 
             balance:newData.balance, 
             position:newData.position
@@ -29,20 +30,20 @@ export class Repository{
     }
 
     public async renewAccountStatisticByRaiting(data:Pick<User,"login">){
-        const user = this.db.get(data.login)
+        // const user = this.db.get(data.login)
     }
 
     public async getAccountInfo(login:string): Promise<Account>{
-        const user = this.db.get(login)
+        const user = await this.db.User.findOne({where: {username: login}})
         if(!user){
             throw Error(`ACCOUNT_DOESNT_FOUND`)
         }
-        
+
         return {
             id:user.id,
-            nickname:user.nickname,
-            games:user.games, 
-            balance:user.balance, 
+            username:user.username,
+            games:user.games,
+            balance:user.balance,
             position:user.position
         }
     }

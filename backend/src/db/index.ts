@@ -4,11 +4,12 @@ import { Sequelize, Options } from "sequelize";
 
 // import { Account } from "./models/Accounts";
 import { User } from "./models/User";
+import {Account} from "./models/Account";
 
 const database = getDatabase();
 
 const db = (sequelize: Sequelize = database) => ({
-  // Account: Account(sequelize),
+  Account: Account(sequelize),
   User: User(sequelize),
 });
 

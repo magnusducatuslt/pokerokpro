@@ -1,21 +1,21 @@
 import { Sequelize, Model, DataTypes } from "sequelize";
 import { ModelType } from "../ModelType";
 
-interface Agreement extends Model {
+interface Account extends Model {
   readonly id: string;
 
-  projectId: string;
-  employeeId: string;
+  platform: string;
+  userId: string;
   status: string;
-  contractId: string;
+  isActive: string;
 
   readonly createdAt: Date;
   readonly updatedAt: Date;
 }
 
-export type AgreementModel = ModelType<Agreement>;
+export type AccountModel = ModelType<Account>;
 
-export const Agreement = (dbService: Sequelize) => {
+export const Account = (dbService: Sequelize) => {
   const attributes = {
     id: {
       type: DataTypes.STRING(250),
@@ -24,12 +24,12 @@ export const Agreement = (dbService: Sequelize) => {
       allowNull: false,
       unique: true,
     },
-    projectId: {
+    userId: {
       type: DataTypes.STRING(250),
       allowNull: false,
     },
-    employeeId: {
-      type: DataTypes.STRING(250),
+    platform: {
+      type: DataTypes.STRING(3),
       allowNull: false,
     },
     status: { type: DataTypes.STRING(250) },
@@ -39,7 +39,12 @@ export const Agreement = (dbService: Sequelize) => {
     },
   };
 
-  const model = dbService.define("agreements", attributes) as AgreementModel;
+  const model = dbService.define("agreements", attributes) as AccountModel;
 
-  return model;
+  model.associate = function (models) {
+    models.Account.belongsTo(models.User, {
+      foreignKey: "id",
+      as: 'user',
+    });
+  };
 };

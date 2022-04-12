@@ -13,12 +13,13 @@ const schema: Joi.SchemaMap = {
   DATABASE_POSTGRES_DATABASE: Joi.string().required(),
   DATABASE_POSTGRES_PASSWORD: Joi.string().required(),
   DATABASE_POSTGRES_PORT: Joi.number().required(),
-  DATABASE_POSTGRES_CERTIFICATE: Joi.string().required(),
+  // DATABASE_POSTGRES_CERTIFICATE: Joi.string().required(),
 
   DATABASE_PGADMIN_DEFAULT_EMAIL: Joi.string().required(),
   DATABASE_PGADMIN_DEFAULT_PASSWORD: Joi.string().required(),
   DATABASE_PGADMIN_PORT: Joi.number().required(),
 
+  CRYPTO_NONCE: Joi.string().required(),
   // DATABASE_REDIS_USERNAME: Joi.string().required(),
   // DATABASE_REDIS_DOMAIN: Joi.string().required(),
   // DATABASE_REDIS_PORT: Joi.number().required(),

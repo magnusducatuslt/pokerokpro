@@ -1,6 +1,6 @@
 export type Account = {
     id: string,
-    nickname: string,
+    username: string,
     games: number,
     balance: number,
     position:number

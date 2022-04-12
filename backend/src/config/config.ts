@@ -36,7 +36,7 @@ export const config = {
       database: envVars.DATABASE_POSTGRES_DATABASE,
       password: envVars.DATABASE_POSTGRES_PASSWORD,
       port: normalizeNumber(envVars.DATABASE_POSTGRES_PORT),
-      certificate: envVars.DATABASE_POSTGRES_CERTIFICATE,
+      // certificate: envVars.DATABASE_POSTGRES_CERTIFICATE,
     },
     pgadmin: {
       defaultEmail: envVars.DATABASE_PGADMIN_DEFAULT_EMAIL,

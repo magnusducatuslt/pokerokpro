@@ -4,7 +4,7 @@ import fs from "fs";
 const now = Date.now() * 13;
 const name = process.argv.slice(2).shift();
 
-const migrationName = `src/db-v2/migrations/common/${now}-${name}.ts`;
+const migrationName = `src/db/migrations/${now}-${name}.ts`;
 const migrationPath = path.resolve(process.cwd(), migrationName);
 
 const command = `

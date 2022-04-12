@@ -5,12 +5,12 @@ import {CaseLogin} from '../cases/login'
 import {Bitshares} from '../../infra/blockchain'
 import {Repository} from '../repository'
 import {JWT} from '../../infra/jwt'
-import {database} from '../../infra/database'
+import { db } from '../../db/index'
 import {CaseRefreshAccountStatistics} from '../../dashboard/cases/refreshAccountStatistics'
 
 export const login = (req:Request,res:Response)=>{
     const data = req.body
-    const repository = new Repository(database)
+    const repository = new Repository(db)
     const blockchain = new Bitshares()
 
     new CaseLogin(repository, blockchain, new JWT(), new CaseRefreshAccountStatistics(repository,blockchain))
