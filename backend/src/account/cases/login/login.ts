@@ -8,8 +8,9 @@ export class CaseLogin {
     constructor(private _repository:Repository,private _blockchain:Bitshares, private jwt:JWT, private _refreshAccountService:CaseRefreshAccountStatistics){}
 
     public async invoke({login,password}:{login:string,password:string}): Promise<{token: string | boolean}>{
+        console.log(login, password)
         try{
-            const user = await this._repository.findUser(login);
+            const user = await this._repository.findUser(login, password);
 
             if(user) {
                 return {

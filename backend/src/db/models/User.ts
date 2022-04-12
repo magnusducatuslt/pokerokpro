@@ -19,7 +19,7 @@ interface UserAttributes {
 //define attributes which be attr?:value in typescript definition 
 interface UserCreationAttributes extends Optional<UserAttributes, "id" | "registeredAt"> {}
 
-interface UserInstance
+export interface UserInstance
   extends Model<UserAttributes, UserCreationAttributes>,
     UserAttributes {}
 
@@ -46,7 +46,10 @@ export const User = (dbService: Sequelize) => {
   const model = dbService.define(TABLE_NAME, attributes) as UserModel;
 
   model.associate = function (models) {
-    // TODO associate to account
+    models.User.hasMany(models.Account, {
+      foreignKey: "userId",
+      as: 'userAccounts',
+    });
   };
 
   return model;

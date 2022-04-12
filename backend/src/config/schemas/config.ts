@@ -19,6 +19,7 @@ const schema: Joi.SchemaMap = {
   DATABASE_PGADMIN_DEFAULT_PASSWORD: Joi.string().required(),
   DATABASE_PGADMIN_PORT: Joi.number().required(),
 
+  CRYPTO_NONCE: Joi.string().required(),
   // DATABASE_REDIS_USERNAME: Joi.string().required(),
   // DATABASE_REDIS_DOMAIN: Joi.string().required(),
   // DATABASE_REDIS_PORT: Joi.number().required(),
