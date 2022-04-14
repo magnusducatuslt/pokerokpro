@@ -1,6 +1,6 @@
 import {Request} from 'express'
 import jwt from 'jsonwebtoken'
-import {User} from '../../entities/User'
+import {UserInstance} from "db/models/User"
 
 const TOKEN_SECRET = `1a2b-3c4d-@5e6f-7g8h-asdasd-asdasd-s`
 const EXPIRES_IN = '1800s'
@@ -16,7 +16,7 @@ export class JWT {
         return authHeader && authHeader.split(' ')[1]
     }
 
-    public getEntityFromToken(token:string): Promise<User>{
+    public getEntityFromToken(token:string): Promise<UserInstance>{
         /**
          * can throw error "JsonWebTokenError: jwt malformed"
          * if arguments.length signed in JWT token more than 1
@@ -32,7 +32,7 @@ export class JWT {
         })
     }
 
-    public getTokenFromData(data:User){
-        return jwt.sign({ login:data.login }, TOKEN_SECRET,{ expiresIn: EXPIRES_IN })
+    public getTokenFromData(data:UserInstance){
+        return jwt.sign({ username:data.username }, TOKEN_SECRET,{ expiresIn: EXPIRES_IN })
     }
 }

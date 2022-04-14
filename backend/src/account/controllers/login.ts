@@ -9,10 +9,10 @@ import { db } from '../../db/index'
 import {CaseRefreshAccountStatistics} from '../../dashboard/cases/refreshAccountStatistics'
 
 export const login = (req:Request,res:Response)=>{
-    const data = req.body
+    const data =  Object.assign(req.body,{username:req.body.login})
     const repository = new Repository(db)
     const blockchain = new Bitshares()
-
+    
     new CaseLogin(repository, blockchain, new JWT(), new CaseRefreshAccountStatistics(repository,blockchain))
         .invoke(data)
         .then(result => res.status(200).json(result))

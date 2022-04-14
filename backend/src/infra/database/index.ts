@@ -8,8 +8,3 @@ export const getDatabase = (
     //@ts-ignore
   connectionConfig = connectionConfigs[config.env]
 ): Sequelize => new Sequelize(connectionConfig);
-
-
-export type DatabaseT = Map<string, User & Account >
-
-export const database:DatabaseT = new Map()

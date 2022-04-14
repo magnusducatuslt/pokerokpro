@@ -31,19 +31,20 @@ export class CaseUserInfo {
         return this.getTransactions(login, transactions.concat(result),id.length ? id : '')
     }
 
-    public async invoke({login}:User) : Promise<Account>{
+    public async invoke({username}:User) : Promise<Account>{
         try{
-            const account = await this._repository.getAccountInfo(login);
+            //@ts-ignore
+            const account = await this._repository.getAccountInfo({accountName:username, userId:"",platform:""});
             
-            const transactions = await this.getTransactions(login,[])
-            console.log('transaction length',transactions.length)
+            const transactions = await this.getTransactions(username,[])
+
             const games = transactions.reduce((acc,transaction) => {
                 if(transaction.op[1].reason === OperationsReasonsE['Player do buy-out']){
                     acc = acc+1
                 }
                 return acc 
             },0)
-
+            //@ts-ignore
             return Object.assign(account,{games})
         }catch(error){
             console.log(error);

@@ -9,6 +9,7 @@
     "start:env": "docker-compose up -d",
     "build": "yarn clean && tsc -p .",
     "clean": "rm -rf ./dist",
+    "db:clear": "yarn build && node ./tools/drop-database.js",
     "db:migrate": "yarn build && node ./tools/migrate-db.js up",
     "db:migrate:skeleton": "ts-node ./src/db/mocks/migration-skeleton.ts"
   },

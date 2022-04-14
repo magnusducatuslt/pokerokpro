@@ -3,13 +3,13 @@ import {Request, Response} from 'express'
 
 import {Bitshares} from '../../infra/blockchain'
 import {Repository} from '../../account/repository'
-import {database} from '../../infra/database'
+import {db} from '../../db'
 import {CaseRefreshAccountStatistics} from '../cases/refreshAccountStatistics'
 
 export const refreshAccountStatistics = (req:Request,res:Response)=>{
     //@ts-ignore
     const data = req.user
-    const repository = new Repository(database)
+    const repository = new Repository(db)
     const blockchain = new Bitshares()
 
     new CaseRefreshAccountStatistics(repository, blockchain)

@@ -12,6 +12,7 @@ export class CaseRefreshAccountStatistics {
        
         return {
             id: account.id,
+            //@ts-ignore
             nickname:account.name,
             games:0,
             position:0,
@@ -20,15 +21,17 @@ export class CaseRefreshAccountStatistics {
         }
     }
 
-    public async invoke({login}:User):Promise<Account>{
+    public async invoke({username}:User):Promise<Account>{
         try{
 
-           
-            const result = await this._blockchain.findUser(login);
+           console.log("refresh",username)
+            const result = await this._blockchain.findUser(username);
+            console.log("result",result)
             const info = this.getAccountInfoByAccountFromBitshares(result)
-
+            console.log("renew",result)
+            //@ts-ignore
             const data = await this._repository.renewAccountStatisticByAccountInfo(info)
-            
+            //@ts-ignore
             return data
         }catch(error){
             console.log(error);

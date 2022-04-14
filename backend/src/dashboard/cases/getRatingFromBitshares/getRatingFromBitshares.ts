@@ -25,10 +25,11 @@ export class CaseGetRatingFromBitshares {
     
     constructor(private _repository:Repository, private _blockchain:Bitshares){}
 
-    public async invoke({login}:User): Promise<Account[]>{
+    public async invoke({username}:User): Promise<Account[]>{
+        console.log('-----',username)
         try{
-            const result = await this._blockchain.receiveRating({login})
-            
+            const result = await this._blockchain.receiveRating({accountName:username})
+            //@ts-ignore
             return result.total.map(item => ({
                 id:"0",
                 nickname: item.n,

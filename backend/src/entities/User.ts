@@ -1,6 +1,11 @@
 export type User = {
-    id:string;
-    pubKey:string;
-    login:string;
-    password:string;
+    readonly id: string;
+    name: string;
+    username: string;
+    email: string;
+    avatar: string;
+    password: string;
+    isActive: boolean;
+
+    readonly registeredAt: Date;
 }

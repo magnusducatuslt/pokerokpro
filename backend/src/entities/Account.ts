@@ -1,7 +1,12 @@
 export type Account = {
     id: string,
-    username: string,
+    platform: string;
+    status: string;
+    isActive: string;
+    accountName: string;
     games: number,
     balance: number,
-    position:number
+    position:number,
+
+    pubKey: string
 }

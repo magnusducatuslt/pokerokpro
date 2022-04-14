@@ -2,14 +2,14 @@
 import {Request, Response} from 'express'
 
 import {Repository} from '../repository'
-import {database} from '../../infra/database'
+import {db} from '../../db'
 import {CaseUserInfo} from '../cases/getUserInfo'
 import {Bitshares} from '../../infra/blockchain'
 
 export const getUserInfo = (req:Request,res:Response)=>{
     //@ts-ignore
     const data = req.user
-    const repository = new Repository(database)
+    const repository = new Repository(db)
     const blockchain = new Bitshares()
 
     new CaseUserInfo(repository,blockchain)
