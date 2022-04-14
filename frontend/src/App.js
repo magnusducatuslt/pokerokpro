@@ -18,12 +18,12 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route index element={<Login />} />
-        <Route path="/login" element={<Login />} />
+        <Route index element={<Leaderboard />} />
+       {/* <Route path="/login" element={<Login />} />
         <Route element={<Layout > <Outlet /> </Layout>}>
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/account" element={<Account />} />
-        </Route>
+        </Route>*/}
       </Routes>
   </Router>
   );
