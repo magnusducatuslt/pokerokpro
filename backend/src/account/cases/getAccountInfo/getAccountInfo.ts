@@ -1,11 +1,11 @@
 import {Repository} from '../../repository'
-import {User,Account} from '../../../entities'
+import {User,Account, PersonalRating} from '../../../entities'
 import {Bitshares} from '../../../infra/blockchain'
 import {OperationsReasonsE, AccountHistory} from '../../../infra/blockchain/dto/accountHistory'
-import axios from 'axios'
+
 const LIMIT = 100;
 
-export class CaseUserInfo {
+export class CaseAccountInfo {
     
     constructor(private _repository:Repository, private _blockchain:Bitshares){}
 
@@ -31,11 +31,21 @@ export class CaseUserInfo {
         return this.getTransactions(login, transactions.concat(result),id.length ? id : '')
     }
 
-    public async invoke({username}:User) : Promise<Account>{
+    public async invoke({username,id}:User) : Promise<PersonalRating>{
         try{
-            //@ts-ignore
-            const account = await this._repository.getAccountInfo({accountName:username, userId:"",platform:""});
-            
+
+            const account = await this._repository.getAccount({userId:id,platform:"TPA"});
+            if(!account){
+                throw new Error('account not found')
+            }
+            const response = {
+                id:account.id!,
+                username:account.accountName,
+                games:account.games,
+                balance:account.balance,
+                position:account.position
+            }
+
             const transactions = await this.getTransactions(username,[])
 
             const games = transactions.reduce((acc,transaction) => {
@@ -44,8 +54,7 @@ export class CaseUserInfo {
                 }
                 return acc 
             },0)
-            //@ts-ignore
-            return Object.assign(account,{games})
+            return response
         }catch(error){
             console.log(error);
             throw error

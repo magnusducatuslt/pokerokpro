@@ -22,7 +22,7 @@ export const validateToken = (req:Request,res:Response,next:NextFunction) => {
             console.log('----',user)
             //@ts-ignore
             req.user = user
-            console.log('going next')
+            console.log('going next',user)
             return next()
             
         }).catch(userDoesntExist => res.sendStatus(403))

@@ -46,21 +46,14 @@ export class Repository{
         // const user = this.db.get(data.login)
     }
 
-    public async getAccountInfo(data:AccountAttributes): Promise<AccountInstance>{
-        const account = await this.db.Account.findOne({where: {userId: data.userId}})
+    public async getAccount(data:Partial<AccountAttributes>): Promise<AccountInstance>{
+        const account = await this.db.Account.findOne({where: data})
         
         if(!account){
             throw Error(`ACCOUNT_DOESNT_FOUND`)
         }
 
-        return {
-            id:account.id,
-            //@ts-ignore
-            username:account.accountName,
-            games:account.games,
-            balance:account.balance,
-            position:account.position
-        }
+        return account
     }
 
 }
