@@ -41,7 +41,7 @@ export class CaseAccountInfo {
             const response = {
                 id:account.id!,
                 username:account.accountName,
-                games:account.games,
+                game:account.game,
                 balance:account.balance,
                 position:account.position
             }

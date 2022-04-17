@@ -36,7 +36,7 @@ export class Repository{
             id:account.id,
             //@ts-ignore
             username:account.username,
-            games:account.games, 
+            game:account.game,
             balance:account.balance, 
             position:account.position
         }

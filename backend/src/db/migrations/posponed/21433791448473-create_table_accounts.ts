@@ -1,7 +1,7 @@
 
 import { QueryInterface, DataTypes } from "sequelize";
-import { db } from "../index";
-import {TABLE_NAME as TABLE_NAME_ACCOUNT} from "../models/Account";
+import { db } from "../../index";
+import {TABLE_NAME as TABLE_NAME_ACCOUNT} from "../../models/Account";
 
 module.exports = {
   async up(queryInterface: QueryInterface) {

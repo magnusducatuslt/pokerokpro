@@ -1,6 +1,6 @@
 export interface RatingBase {
     position: number;
-    games: number;
+    game: number;
 }
 
 export type PersonalRating =  {

@@ -4,7 +4,7 @@ export type Account = {
     status: string;
     isActive: string;
     accountName: string;
-    games: number,
+    game: number,
     balance: number,
     position:number,
 

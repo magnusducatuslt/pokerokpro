@@ -44,7 +44,7 @@ export class CaseLogin {
                         platform:"TPA",
                         pubKey,
                         balance:info.balance,
-                        games:info.games,
+                        game:info.game,
                         position:info.position,
                         accountId:info.id,
                         isActive:"true",

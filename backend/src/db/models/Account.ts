@@ -12,6 +12,12 @@ interface Relations {
 export interface AccountAttributes extends Optional<AccountEntity,"id"> {
   userId: string;
   accountId:string; // id on platform example in blockchain '1.2.10674'
+  // accountName: string;
+  // game: string;
+  // platform: string;
+  // status: string;
+  // isActive: boolean;
+  // pubKey: string;
 }
 
 interface AccountCreationAttributes extends Optional<AccountAttributes, "id"> {}
@@ -34,7 +40,7 @@ export const Account = (dbService: Sequelize) => {
     accountName: { type: DataTypes.STRING(250), unique: true, allowNull: false, key: 'username_uniq' },
     accountId: { type: DataTypes.STRING(250), allowNull: false }, 
     userId: {
-      type: DataTypes.STRING(250),
+      type: DataTypes.UUIDV4,
       allowNull: false,
       references:{
         model: 'users',
@@ -42,12 +48,12 @@ export const Account = (dbService: Sequelize) => {
       }
     },
     platform: {
-      type: DataTypes.STRING(3),
+      type: DataTypes.STRING(5),
       allowNull: false,
     },
-    status: { type: DataTypes.STRING(250) },
+    status: { type: DataTypes.STRING(50) },
     isActive: { type: DataTypes.BOOLEAN, defaultValue: true, allowNull: false },
-    games: { type: DataTypes.INTEGER, defaultValue: 0, allowNull: false },
+    game: { type: DataTypes.INTEGER, defaultValue: 0, allowNull: false },
     balance: { type: DataTypes.INTEGER, defaultValue: 0, allowNull: false },
     position: { type: DataTypes.INTEGER, defaultValue: 0, allowNull: false },
     pubKey: { type: DataTypes.STRING(250) },
