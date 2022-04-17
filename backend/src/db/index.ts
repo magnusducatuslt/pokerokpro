@@ -2,13 +2,15 @@ import { getDatabase } from "../infra/database";
 import { Sequelize, Options } from "sequelize";
 
 import { User } from "./models/User";
-import {Account} from "./models/Account";
+import { Account } from "./models/Account";
+import { AccountStatisticModelDefinition } from "./models/AccountStatistic";
 
 const database = getDatabase();
 
 const db = (sequelize: Sequelize = database) => ({
   Account: Account(sequelize),
   User: User(sequelize),
+  AccountStatistic: AccountStatisticModelDefinition(sequelize),
 });
 
 const orm = db();

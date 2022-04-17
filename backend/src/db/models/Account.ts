@@ -2,22 +2,17 @@ import { Sequelize, Model, DataTypes,Optional,ModelAttributes } from "sequelize"
 import { ModelType } from "../ModelType";
 import {UserInstance} from './User'
 import {Account as AccountEntity} from 'entities'
+import {AccountStatisticInstance} from "./AccountStatistic";
 
 export const TABLE_NAME = "accounts";
 export const ACCOUNTS_BELONGS_TO_USER = "user"
+export const STATISTIC_BELONGS_TO_ACCOUNT = "statistic"
 
 interface Relations {
   [ACCOUNTS_BELONGS_TO_USER]:UserInstance
+  [STATISTIC_BELONGS_TO_ACCOUNT]:AccountStatisticInstance
 }
 export interface AccountAttributes extends Optional<AccountEntity,"id"> {
-  userId: string;
-  accountId:string; // id on platform example in blockchain '1.2.10674'
-  // accountName: string;
-  // game: string;
-  // platform: string;
-  // status: string;
-  // isActive: boolean;
-  // pubKey: string;
 }
 
 interface AccountCreationAttributes extends Optional<AccountAttributes, "id"> {}
@@ -65,6 +60,10 @@ export const Account = (dbService: Sequelize) => {
     models.Account.belongsTo(models.User, {
       foreignKey: "id",
       as: ACCOUNTS_BELONGS_TO_USER,
+    });
+    models.Account.hasMany(models.AccountStatistic, {
+      foreignKey: "accountId",
+      as: STATISTIC_BELONGS_TO_ACCOUNT,
     });
   };
 
